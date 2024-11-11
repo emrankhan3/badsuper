@@ -1,4 +1,13 @@
+using demo.Repository.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//Register DbContext with PostgreSQL
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default"))
+);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
